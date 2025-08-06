@@ -62,12 +62,22 @@ export const parseTimetable = (htmlSnippet) => {
   const rows = $(".course_tbl tbody tr").slice(1); 
   rows.each((i, row) => {
     const columns = $(row).find("td");
+    const courseTitle = columns.eq(2).text().trim() || "N/A";
+    const slot = columns.eq(8).text().trim() || "N/A";
+    const roomNumber = columns.eq(9).text().trim() || "N/A"; // GCR Code column contains room numbers like "TP 706"
+    console.log(`Column 9 (GCR/Room): '${columns.eq(9).text().trim()}'`);
+    console.log(`Column 10 (Room No): '${columns.eq(10).text().trim()}'`);
+    console.log(`Column 11 (Year): '${columns.eq(11).text().trim()}'`);
+    
+    console.log(`Row ${i}: Title=${courseTitle}, Slot=${slot}, Room=${roomNumber}, Total columns=${columns.length}`);
+    
     courses.push({
-      courseTitle: columns.eq(2).text().trim() || "N/A",
-      slot: columns.eq(8).text().trim() || "N/A",
+      courseTitle,
+      slot,
+      roomNumber,
     });
   });
 
-  console.log(courses)
+  console.log("Final courses array:", courses)
   return { batch, courses };
 };

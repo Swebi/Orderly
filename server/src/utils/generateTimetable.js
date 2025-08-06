@@ -8,7 +8,10 @@ const generateTimetable = (courses, batch) => {
       .split(/[-/]+/)
       .filter((code) => code.trim() !== "");
     codes.forEach((code) => {
-      slotMap[code] = course.courseTitle;
+      const subjectWithRoom = course.roomNumber && course.roomNumber !== "N/A" 
+        ? `${course.courseTitle} - ${course.roomNumber}`
+        : course.courseTitle;
+      slotMap[code] = subjectWithRoom;
     });
   });
 
