@@ -59,15 +59,19 @@ export const parseTimetable = (htmlSnippet) => {
   });
 
   const courses = [];
-  const rows = $(".course_tbl tbody tr").slice(1); 
+  const rows = $(".course_tbl tbody tr").slice(1);
   rows.each((i, row) => {
     const columns = $(row).find("td");
+    const courseTitle = columns.eq(2).text().trim() || "N/A";
+    const slot = columns.eq(8).text().trim() || "N/A";
+    const roomNumber = columns.eq(9).text().trim() || "N/A";
     courses.push({
-      courseTitle: columns.eq(2).text().trim() || "N/A",
-      slot: columns.eq(8).text().trim() || "N/A",
+      courseTitle,
+      slot,
+      roomNumber,
     });
   });
 
-  console.log(courses)
+  console.log(courses);
   return { batch, courses };
 };

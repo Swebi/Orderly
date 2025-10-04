@@ -8,7 +8,7 @@ const generateTimetable = (courses, batch) => {
       .split(/[-/]+/)
       .filter((code) => code.trim() !== "");
     codes.forEach((code) => {
-      slotMap[code] = course.courseTitle;
+      slotMap[code] = { title: course.courseTitle, room: course.roomNumber };
     });
   });
 
@@ -172,7 +172,8 @@ const generateTimetable = (courses, batch) => {
       result[dayNumber].push({
         start: timeSlots[slotIndex].start,
         end: timeSlots[slotIndex].end,
-        subject: slotMap[code] || "",
+        subject: slotMap[code]?.title || "",
+        room: slotMap[code]?.room || "",
       });
     });
   });
