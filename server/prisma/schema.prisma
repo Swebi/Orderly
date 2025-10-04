@@ -15,6 +15,7 @@ model User {
   timetable     Json?
   academiaEmail String?
   enabled       Boolean
+  color         String     @default("BLUE")
 }
 
 model Academia {

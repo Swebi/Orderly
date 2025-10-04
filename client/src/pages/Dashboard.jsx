@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [selectedColor, setSelectedColor] = useState("BLUE");
 
   const { toast } = useToast();
 
@@ -28,12 +29,6 @@ const Dashboard = () => {
   const handleEmailChange = (e) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
-    if (newEmail && !validateEmail(newEmail)) {
-      toast({
-        variant: "destructive",
-        title: "Invalid Email",
-      });
-    }
   };
 
   const getTimetable = async () => {
@@ -134,6 +129,14 @@ const Dashboard = () => {
   const scrapeTimetable = async () => {
     setLoading(true);
     if (email.length >= 1 && password.length >= 1) {
+      if (!validateEmail(email)) {
+        toast({
+          variant: "destructive",
+          title: "Invalid Email",
+        });
+        setLoading(false);
+        return;
+      }
       try {
         const { data } = await axiosInstance.post("/api/scrape", {
           email,
@@ -159,6 +162,7 @@ const Dashboard = () => {
         variant: "destructive",
         title: "Please enter both email and password",
       });
+      setLoading(false);
     }
   };
 
@@ -170,6 +174,29 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.error("Error fetching job:", error);
+    }
+  };
+
+  const saveColor = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axiosInstance.post("/api/color", {
+        color: selectedColor,
+      });
+      if (data.success) {
+        toast({
+          title: `Set event color`,
+        });
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Error toggling  color:", error);
+      toast({
+        variant: "destructive",
+        title: `Could not set event color`,
+      });
+      setSelectedColor(selectedColor);
+      setLoading(false);
     }
   };
 
@@ -194,6 +221,9 @@ const Dashboard = () => {
         loading={loading}
         toggleEnabled={toggleEnabled}
         createCalendar={createCalendar}
+        selectedColor={selectedColor}
+        setSelectedColor={setSelectedColor}
+        saveColor={saveColor}
       />
 
       <Tabs defaultValue="timetable" className="w-full">
