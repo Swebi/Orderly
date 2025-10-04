@@ -172,7 +172,7 @@ const generateTimetable = (courses, batch) => {
       result[dayNumber].push({
         start: timeSlots[slotIndex].start,
         end: timeSlots[slotIndex].end,
-        subject: slotMap[code]?.title || "",
+        subject: slotMap[code]?.title || slotMap[code] || "",
         room: slotMap[code]?.room || "",
       });
     });

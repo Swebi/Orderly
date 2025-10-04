@@ -47,6 +47,7 @@ export const addLectureEvents = async (lectures, currentDate) => {
           lecture.subject,
           lecture.start,
           lecture.end,
+          lecture.room? lecture.room : "",
           currentDate
         );
 
