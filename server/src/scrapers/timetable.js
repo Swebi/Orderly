@@ -34,6 +34,7 @@ const automateTimetableScrape = async (job) => {
     if (response.status === 200) {
       const timetable = parseTimetable(response.data);
       const { batch, courses } = timetable;
+      job.log(batch, courses);
       return { batch, courses };
     } else {
       throw new Error("Failed to fetch timetable data");

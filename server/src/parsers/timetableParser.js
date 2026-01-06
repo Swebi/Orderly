@@ -53,8 +53,10 @@ export const parseTimetable = (htmlSnippet) => {
   const infoTable = $(".cntdDiv table").first();
   infoTable.find("tr").each((i, el) => {
     const tds = $(el).find("td");
-    if (tds.eq(0).text().trim().startsWith("Batch")) {
-      batch = tds.eq(1).text().trim();
+    if (tds.eq(0).text().trim().startsWith("Combo / Batch:")) {
+      const batchValue = tds.eq(1).text().trim();
+      const match = batchValue.match(/^(\d+)\//);
+      batch = match ? match[1] : batchValue;
     }
   });
 
@@ -71,7 +73,6 @@ export const parseTimetable = (htmlSnippet) => {
       roomNumber,
     });
   });
-
-  console.log(courses);
+  
   return { batch, courses };
 };
