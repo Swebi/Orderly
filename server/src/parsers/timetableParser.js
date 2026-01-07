@@ -55,7 +55,7 @@ export const parseTimetable = (htmlSnippet) => {
     const tds = $(el).find("td");
     if (tds.eq(0).text().trim().startsWith("Combo / Batch:")) {
       const batchValue = tds.eq(1).text().trim();
-      const match = batchValue.match(/^(\d+)\//);
+      const match = batchValue.match(/\/(\d+)/);
       batch = match ? match[1] : batchValue;
     }
   });
@@ -73,6 +73,6 @@ export const parseTimetable = (htmlSnippet) => {
       roomNumber,
     });
   });
-  
+
   return { batch, courses };
 };
