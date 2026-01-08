@@ -3,7 +3,6 @@ import { oauth2Client, scopes } from "../../utils/googleUtils.js";
 import axios from "axios";
 import { DateTime } from "luxon";
 
-
 export const createTimetable = async (req, res, next) => {
   try {
     const { email } = req.user;
@@ -48,6 +47,28 @@ export const getTimetable = async (req, res, next) => {
   }
 };
 
+export const updateUserColor = async (req, res, next) => {
+  try {
+    const { email } = req.user;
+    const { color } = req.body;
+
+    await prisma.user.update({
+      where: {
+        email,
+      },
+      data: {
+        color,
+      },
+    });
+
+    res
+      .status(200)
+      .json({ success: true, message: "Updated color succesfully" });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
 export const scrapeTimetable = async (req, res, next) => {
   req.user.academiaEmail = req.body.email;
   req.user.academiaPassword = req.body.password;
@@ -167,7 +188,6 @@ export const getJobStatus = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const getAcademiaEmail = async (req, res, next) => {
   try {

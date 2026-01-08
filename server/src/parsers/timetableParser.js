@@ -53,24 +53,20 @@ export const parseTimetable = (htmlSnippet) => {
   const infoTable = $(".cntdDiv table").first();
   infoTable.find("tr").each((i, el) => {
     const tds = $(el).find("td");
-    if (tds.eq(0).text().trim().startsWith("Batch")) {
-      batch = tds.eq(1).text().trim();
+    if (tds.eq(0).text().trim().startsWith("Combo / Batch:")) {
+      const batchValue = tds.eq(1).text().trim();
+      const match = batchValue.match(/\/(\d+)/);
+      batch = match ? match[1] : batchValue;
     }
   });
 
   const courses = [];
-  const rows = $(".course_tbl tbody tr").slice(1); 
+  const rows = $(".course_tbl tbody tr").slice(1);
   rows.each((i, row) => {
     const columns = $(row).find("td");
     const courseTitle = columns.eq(2).text().trim() || "N/A";
     const slot = columns.eq(8).text().trim() || "N/A";
-    const roomNumber = columns.eq(9).text().trim() || "N/A"; // GCR Code column contains room numbers like "TP 706"
-    console.log(`Column 9 (GCR/Room): '${columns.eq(9).text().trim()}'`);
-    console.log(`Column 10 (Room No): '${columns.eq(10).text().trim()}'`);
-    console.log(`Column 11 (Year): '${columns.eq(11).text().trim()}'`);
-    
-    console.log(`Row ${i}: Title=${courseTitle}, Slot=${slot}, Room=${roomNumber}, Total columns=${columns.length}`);
-    
+    const roomNumber = columns.eq(9).text().trim() || "N/A";
     courses.push({
       courseTitle,
       slot,
@@ -78,6 +74,5 @@ export const parseTimetable = (htmlSnippet) => {
     });
   });
 
-  console.log("Final courses array:", courses)
   return { batch, courses };
 };

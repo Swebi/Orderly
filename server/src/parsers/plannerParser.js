@@ -40,8 +40,8 @@ export const parsePlanner = (html) => {
   let months = [];
   headers.each((_, header) => {
     const text = $(header).text();
-    if (text.includes("'25")) {
-      months.push(text.replace("'25", "").trim());
+    if (text.includes("'26")) {
+      months.push(text.replace("'26", "").trim());
     }
   });
 
@@ -70,7 +70,7 @@ export const parsePlanner = (html) => {
         let date = cells.eq(dateIndex).text().trim();
         let doValue = cells.eq(doIndex).text().trim();
         if (date) {
-          let year = "2025";
+          let year = "2026";
           let monthIndex = monthsList.indexOf(months[i]) + 1;
           let formattedDate = `${year}-${monthIndex
             .toString()

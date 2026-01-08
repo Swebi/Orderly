@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import {
   addLectureEvents,
   deleteExistingEvents,
+  EVENT_COLORS,
   oauth2Client,
 } from "../utils/googleUtils.js";
 import { DateTime } from "luxon";
@@ -84,6 +85,7 @@ export const calendarProcedure = async (job) => {
     job.log(`Day Order for ${currentDate}`, dayOrder);
 
     const lectures = user.timetable[dayOrder];
+    const color = user.color ?? EVENT_COLORS.BLUE;
 
     if (checkSchedule(user.timetable)) {
       const startOfDay = DateTime.now()
@@ -98,7 +100,7 @@ export const calendarProcedure = async (job) => {
         .toISO();
 
       await deleteExistingEvents(startOfDay, endOfDay);
-      await addLectureEvents(lectures, currentDate);
+      await addLectureEvents(lectures, currentDate, color);
     } else {
       job.log(`No lectures found for ${currentDate}`);
     }

@@ -18,7 +18,7 @@ const automatePlanner = async (job) => {
       .join("; ");
 
     const url =
-      "https://academia.srmist.edu.in/srm_university/academia-academic-services/page/Academic_Planner_2025_26_ODD";
+      "https://academia.srmist.edu.in/srm_university/academia-academic-services/page/Academic_Planner_2025_26_EVEN";
     const headers = {
       Accept: "*/*",
       "Accept-Language": "en-GB,en;q=0.9",

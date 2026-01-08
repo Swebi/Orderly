@@ -50,6 +50,16 @@ export const mockTimetable = {
       start: "16:00",
       subject: "",
     },
+    {
+      end: "17:30",
+      start: "16:50",
+      subject: "",
+    },
+    {
+      end: "18:10",
+      start: "17:30",
+      subject: "",
+    },
   ],
   2: [
     {
@@ -100,6 +110,16 @@ export const mockTimetable = {
     {
       end: "16:50",
       start: "16:00",
+      subject: "",
+    },
+    {
+      end: "17:30",
+      start: "16:50",
+      subject: "",
+    },
+    {
+      end: "18:10",
+      start: "17:30",
       subject: "",
     },
   ],
@@ -154,6 +174,16 @@ export const mockTimetable = {
       start: "16:00",
       subject: "",
     },
+    {
+      end: "17:30",
+      start: "16:50",
+      subject: "",
+    },
+    {
+      end: "18:10",
+      start: "17:30",
+      subject: "",
+    },
   ],
   4: [
     {
@@ -204,6 +234,16 @@ export const mockTimetable = {
     {
       end: "16:50",
       start: "16:00",
+      subject: "",
+    },
+    {
+      end: "17:30",
+      start: "16:50",
+      subject: "",
+    },
+    {
+      end: "18:10",
+      start: "17:30",
       subject: "",
     },
   ],
@@ -258,6 +298,16 @@ export const mockTimetable = {
       start: "16:00",
       subject: "",
     },
+    {
+      end: "17:30",
+      start: "16:50",
+      subject: "",
+    },
+    {
+      end: "18:10",
+      start: "17:30",
+      subject: "",
+    },
   ],
 };
 
@@ -272,6 +322,8 @@ export const timeSlots = [
   { start: "14:20", end: "15:10" },
   { start: "15:10", end: "16:00" },
   { start: "16:00", end: "16:50" },
+  { start: "16:50", end: "17:30" },
+  { start: "17:30", end: "18:10" },
 ];
 
 export const days = ["DO 1", "DO 2", "DO 3", "DO 4", "DO 5"];
@@ -286,4 +338,34 @@ export const hours = [
   "14:20 : 15:10",
   "15:10 : 16:00",
   "16:00 : 16:50",
+  "16:50 : 17:30",
+  "17:30 : 18:10",
 ];
+
+export const EVENT_COLORS = {
+  LIGHT_BLUE: 1, // "#a4bdfc"
+  LIGHT_GREEN: 2, // "#7ae7bf"
+  LIGHT_PURPLE: 3, // "#dbadff"
+  LIGHT_RED: 4, // "#ff887c"
+  YELLOW: 5, // "#fbd75b"
+  ORANGE: 6, // "#ffb878"
+  CYAN: 7, // "#46d6db"
+  LIGHT_GRAY: 8, // "#e1e1e1"
+  BLUE: 9, // "#5484ed"
+  GREEN: 10, // "#51b749"
+  RED: 11, // "#dc2127"
+};
+
+export const COLOR_MAP = {
+  LIGHT_BLUE: "#a4bdfc",
+  LIGHT_GREEN: "#7ae7bf",
+  LIGHT_PURPLE: "#dbadff",
+  LIGHT_RED: "#ff887c",
+  YELLOW: "#fbd75b",
+  ORANGE: "#ffb878",
+  CYAN: "#46d6db",
+  LIGHT_GRAY: "#e1e1e1",
+  BLUE: "#5484ed",
+  GREEN: "#51b749",
+  RED: "#dc2127",
+};

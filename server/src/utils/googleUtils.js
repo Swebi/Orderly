@@ -20,6 +20,20 @@ export const calendar = google.calendar({
   auth: oauth2Client,
 });
 
+export const EVENT_COLORS = {
+  LIGHT_BLUE: 1, // "#a4bdfc"
+  LIGHT_GREEN: 2, // "#7ae7bf"
+  LIGHT_PURPLE: 3, // "#dbadff"
+  LIGHT_RED: 4, // "#ff887c"
+  YELLOW: 5, // "#fbd75b"
+  ORANGE: 6, // "#ffb878"
+  CYAN: 7, // "#46d6db"
+  LIGHT_GRAY: 8, // "#e1e1e1"
+  BLUE: 9, // "#5484ed"
+  GREEN: 10, // "#51b749"
+  RED: 11, // "#dc2127"
+};
+
 export const deleteExistingEvents = async (startOfDay, endOfDay) => {
   const existingEvents = await calendar.events.list({
     calendarId: "primary",
@@ -39,7 +53,7 @@ export const deleteExistingEvents = async (startOfDay, endOfDay) => {
   );
 };
 
-export const addLectureEvents = async (lectures, currentDate) => {
+export const addLectureEvents = async (lectures, currentDate, color) => {
   await Promise.all(
     lectures.map(async (lecture) => {
       if (lecture.subject) {
@@ -47,7 +61,9 @@ export const addLectureEvents = async (lectures, currentDate) => {
           lecture.subject,
           lecture.start,
           lecture.end,
-          currentDate
+          lecture.room ? lecture.room : "",
+          currentDate,
+          color
         );
 
         await calendar.events.insert({
