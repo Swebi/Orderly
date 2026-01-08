@@ -91,7 +91,6 @@ const initCalendar = () => {
 
   worker.on("error", (err) => {
     console.error("Worker error:", err);
-    job.log("Worker error:", err);
   });
 };
 

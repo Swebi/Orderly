@@ -106,13 +106,14 @@ export const getDayOrder = async (req, res, next) => {
       .setZone("Asia/Kolkata")
       .toFormat("yyyy-MM-dd");
 
-    const { dayOrder } = await prisma.academia.findFirst({
-      where: {
-        date: todayIST,
-      },
-    });
+      const academiaRecord = await prisma.academia.findFirst({
+    where: {
+      date: todayIST,
+    },
+  });
 
-    res.status(200).json({ success: true, data: dayOrder });
+  const dayOrder = academiaRecord?.dayOrder || null;
+  res.status(200).json({ success: true, data: dayOrder });
   } catch (error) {
     console.error(error);
     next(error);
