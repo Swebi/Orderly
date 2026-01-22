@@ -53,10 +53,10 @@ export const parseTimetable = (htmlSnippet) => {
   const infoTable = $(".cntdDiv table").first();
   infoTable.find("tr").each((i, el) => {
     const tds = $(el).find("td");
-    if (tds.eq(0).text().trim().startsWith("Combo / Batch:")) {
+    if (tds.eq(0).text().trim().startsWith("Batch:")) {
+      console.log(tds.eq(1).text().trim());
       const batchValue = tds.eq(1).text().trim();
-      const match = batchValue.match(/\/(\d+)/);
-      batch = match ? match[1] : batchValue;
+      batch = parseInt(batchValue);
     }
   });
 
